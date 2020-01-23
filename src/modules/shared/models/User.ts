@@ -1,4 +1,4 @@
-import { IUser } from '../../shared/types';
+import { IUser } from '../types';
 
 export class User {
   // tslint:disable-next-line:variable-name
