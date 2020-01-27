@@ -8,8 +8,8 @@ import { AuthService } from '../../shared';
 @Component({
   selector: 'user-login',
   template: `
-    <form [formGroup]='form' novalidate (ngSubmit)='submit()' style="background: #EEE; border-radius: 5px; padding: 30px;">
-      <h2>Login:</h2>
+    <form [formGroup]='form' novalidate (ngSubmit)='submit()' style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+      <h3>Login:</h3>
       <div>X-TOKEN: {{ authService.token }}</div>
       <div *ngIf="isAuthSuccess">Юзер вошёл</div>
       <div *ngIf="apiErrorMsg">{{ apiErrorMsg }}</div>
