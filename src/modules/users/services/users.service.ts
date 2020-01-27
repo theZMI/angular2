@@ -32,4 +32,8 @@ export class UsersService {
       })
     );
   }
+
+  logout(): void {
+    this.authService.deleteToken();
+  }
 }

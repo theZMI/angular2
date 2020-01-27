@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialAppModule } from '../ngmaterial/ngmaterial.module';
 import { SharedModule } from '../shared/shared.module';
 import { UsersService } from './services';
-import { UsersComponent, UserLoginComponent, UserRegistrationComponent, UsersListComponent } from './components';
+import { UsersComponent, UserLoginComponent, UserLogoutComponent, UserRegistrationComponent, UsersListComponent } from './components';
 
 const routes: Routes = [
   {
@@ -16,7 +16,8 @@ const routes: Routes = [
     children: [
       { path: 'list', component: UsersListComponent },
       { path: 'login', component: UserLoginComponent },
-      { path: 'registration', component: UserRegistrationComponent }
+      { path: 'registration', component: UserRegistrationComponent },
+      { path: 'logout', component: UserLogoutComponent },
     ]
   }
 ];
@@ -25,6 +26,7 @@ const routes: Routes = [
   declarations: [
     UsersComponent,
     UsersListComponent,
+    UserLogoutComponent,
     UserLoginComponent,
     UserRegistrationComponent
   ],

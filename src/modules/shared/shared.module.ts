@@ -5,6 +5,7 @@ import { ErrorInterceptor, AuthInterceptor } from './interceptors';
 import { AuthService } from './services';
 import { MainMenuComponent } from './components';
 import { RouterModule } from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   providers: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     MainMenuComponent
   ],
   imports: [
-    RouterModule
+    RouterModule,
+    CommonModule
   ],
   exports: [
     MainMenuComponent
