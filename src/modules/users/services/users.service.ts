@@ -37,15 +37,39 @@ export class UsersService {
     this.authService.deleteToken();
   }
 
-  getUserIdByToken() {
-
+  getUserIdByToken(token: string) {
+    return this.http.post<IApiAnswer>(`${this.ROOT_URL}get_user_id_by_token.php`, {token}).pipe(
+      map(data => {
+        let ret: number = null;
+        if (data.is_success) {
+          ret = data.data;
+        }
+        return ret;
+      })
+    );
   }
 
-  getUser() {
-
+  getUserById(userId: number): Observable<IUser> {
+    return this.http.post<IApiAnswer>(`${this.ROOT_URL}get_user_by_user_id.php`, {userId}).pipe(
+      map(data => {
+        let ret: IUser = null;
+        if (data.is_success) {
+          ret = data.data;
+        }
+        return ret;
+      })
+    );
   }
 
-  getCurrentUser() {
-
+  getCurrentUser(): Observable<IUser> {
+    this.authService.token$.subscribe(
+      token => {
+        this.getUserIdByToken(token).subscribe(
+          userId => {
+            return this.getUserById(userId);
+          }
+        );
+      }
+    );
   }
 }
