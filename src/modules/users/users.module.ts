@@ -43,5 +43,5 @@ const routes: Routes = [
   bootstrap: [
   ]
 })
-export class UserModule {
+export class UsersModule {
 }

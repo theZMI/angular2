@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
-import { NotFoundComponent } from './not-found.component';
+import { AppComponent } from './components/app.component';
+import { HomeComponent } from './components/home.component';
+import { NotFoundComponent } from './components/not-found.component';
+import { SharedModule } from '../shared/shared.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'users', loadChildren: () => import('../user/user.module').then(m => m.UserModule) },
+  { path: 'users', loadChildren: () => import('../users/users.module').then(m => m.UsersModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    SharedModule
   ],
   providers: [
   ],
