@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { IUser, IApiAnswer, AuthService } from '../../shared';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   readonly ROOT_URL = 'http://www.t.local/api2/user/';
 
   constructor(private http: HttpClient, private authService: AuthService) {

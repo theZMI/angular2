@@ -6,15 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialAppModule } from '../ngmaterial/ngmaterial.module';
 import { SharedModule } from '../shared/shared.module';
-import { UserService } from './services';
-import { UsersComponent, UserLoginComponent, UserRegistrationComponent, UserListComponent } from './components';
+import { UsersService } from './services';
+import { UsersComponent, UserLoginComponent, UserRegistrationComponent, UsersListComponent } from './components';
 
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
     children: [
-      { path: 'list', component: UserListComponent },
+      { path: 'list', component: UsersListComponent },
       { path: 'login', component: UserLoginComponent },
       { path: 'registration', component: UserRegistrationComponent }
     ]
@@ -24,8 +24,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UsersComponent,
+    UsersListComponent,
     UserLoginComponent,
-    UserListComponent,
     UserRegistrationComponent
   ],
   imports: [
@@ -33,12 +33,12 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialAppModule,
-    CommonModule,
     HttpClientModule,
+    CommonModule,
     SharedModule
   ],
   providers: [
-    UserService
+    UsersService
   ],
   bootstrap: [
   ]

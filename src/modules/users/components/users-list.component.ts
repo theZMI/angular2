@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../services';
+import { UsersService } from '../services';
 
 @Component({
-  selector: 'user-list',
+  selector: 'users-list',
   template: `
     <div style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
       <h3>List of users</h3>
@@ -13,14 +13,14 @@ import { UserService } from '../services';
     </div>
   `
 })
-export class UserListComponent implements OnInit {
+export class UsersListComponent implements OnInit {
   users;
 
-  constructor(private userService: UserService) {
+  constructor(private usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.userService.getList().subscribe(
+    this.usersService.getList().subscribe(
       data => {
         this.users = data;
       }

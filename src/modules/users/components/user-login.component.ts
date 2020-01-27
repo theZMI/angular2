@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserService } from '../services';
+import { UsersService } from '../services';
 import { AuthService } from '../../shared';
 
 @Component({
@@ -32,7 +32,7 @@ export class UserLoginComponent implements OnInit {
   isAuthSuccess = false;
   apiErrorMsg = '';
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, public authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private usersService: UsersService, public authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -63,7 +63,7 @@ export class UserLoginComponent implements OnInit {
       this.isAuthSuccess = false;
       this.apiErrorMsg = null;
 
-      this.userService.login(this.form.value).subscribe(
+      this.usersService.login(this.form.value).subscribe(
         isSuccess => this.isAuthSuccess = isSuccess,
         error => this.apiErrorMsg = error
       );
