@@ -6,7 +6,7 @@ import { UsersService } from '../services';
 @Component({
   selector: 'user-registration',
   template: `
-    <form [formGroup]='form' novalidate (ngSubmit)='submit()' style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+    <form [formGroup]='form' novalidate (ngSubmit)='submit()' class="--component">
       <h3>Registraion</h3>
       <div *ngIf="isSuccess">Юзер добавлен</div>
       <mat-form-field class="width-100">

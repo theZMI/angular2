@@ -8,9 +8,8 @@ import { AuthService } from '../../shared';
 @Component({
   selector: 'user-logout',
   template: `
-    <form [formGroup]='form' novalidate (ngSubmit)='submit()' style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+    <form [formGroup]='form' novalidate (ngSubmit)='submit()' class="--component">
       <h3>Logout:</h3>
-      <div *ngIf="isSuccess">Юзер вышёл</div>
       <div>
         <button type="submit" mat-flat-button color="primary" [disabled]='form.invalid'>Logout</button>
       </div>
@@ -19,9 +18,12 @@ import { AuthService } from '../../shared';
 })
 export class UserLogoutComponent implements OnInit {
   form: FormGroup;
-  isSuccess = false;
 
-  constructor(private formBuilder: FormBuilder, public usersService: UsersService, public authService: AuthService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    public usersService: UsersService,
+    public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -29,15 +31,13 @@ export class UserLogoutComponent implements OnInit {
       this.router.navigate(['/users/login']);
     }
 
-    this.form = this.formBuilder.group({
-    });
+    this.form = this.formBuilder.group({});
   }
 
   submit() {
     if (this.form.valid) {
-      this.isSuccess = false;
       this.usersService.logout();
-      this.isSuccess = true;
+      this.router.navigate(['users/login']);
     }
   }
 }

@@ -8,8 +8,8 @@ import { HomeComponent } from './components/home.component';
 import { NotFoundComponent } from './components/not-found.component';
 import { SharedModule } from '../shared/shared.module';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
+const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'users', loadChildren: () => import('../users/users.module').then(m => m.UsersModule) },
   { path: '**', component: NotFoundComponent }
 ];
@@ -23,7 +23,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(routes),
     SharedModule
   ],
   providers: [

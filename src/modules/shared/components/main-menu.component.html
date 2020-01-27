@@ -1,10 +1,14 @@
-<div style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+<div class="--component">
   <h3>MENU</h3>
   <a routerLink="" class="btn btn-link">Home</a>
   <a routerLink="/users/list" class="btn btn-link">Users</a>
-  <a routerLink="/users/login" class="btn btn-link">Login</a>
-  <a routerLink="/users/registration" class="btn btn-link">Registration</a>
-  <div *ngIf="isUserAuth">
+  <div *ngIf="isUserAuth; then userAuth else userNotAuth"></div>
+  <ng-template #userAuth>
+    <a routerLink="/users/dashboard" class="btn btn-link">Dashboard</a>
     <a routerLink="/users/logout" class="btn btn-link">Logout</a>
-  </div>
+  </ng-template>
+  <ng-template #userNotAuth>
+    <a routerLink="/users/login" class="btn btn-link">Login</a>
+    <a routerLink="/users/registration" class="btn btn-link">Registration</a>
+  </ng-template>
 </div>

@@ -12,7 +12,7 @@ export class UsersService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getList(): Observable<IUser[]> {
+  list(): Observable<IUser[]> {
     return this.http.get<IApiAnswer>(this.ROOT_URL + 'get_users.php').pipe(
       map(data => data.data)
     );
@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   login(user: IUser): Observable<boolean> {
-    return this.http.post<IApiAnswer>(this.ROOT_URL + 'login.php', user).pipe(
+    return this.http.post<IApiAnswer>(`${this.ROOT_URL}login.php`, user).pipe(
       map(data => {
         this.authService.token = data.data.authToken;
         return data.is_success;
@@ -35,5 +35,17 @@ export class UsersService {
 
   logout(): void {
     this.authService.deleteToken();
+  }
+
+  getUserIdByToken() {
+
+  }
+
+  getUser() {
+
+  }
+
+  getCurrentUser() {
+
   }
 }

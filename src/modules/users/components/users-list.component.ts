@@ -5,7 +5,7 @@ import { UsersService } from '../services';
 @Component({
   selector: 'users-list',
   template: `
-    <div style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+    <div class="--component">
       <h3>List of users</h3>
       <ul *ngFor="let u of users">
         <li>{{ u | json }}</li>
@@ -20,7 +20,7 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usersService.getList().subscribe(
+    this.usersService.list().subscribe(
       data => {
         this.users = data;
       }

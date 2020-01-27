@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 
 import { UsersService } from '../services';
 import { AuthService } from '../../shared';
@@ -8,11 +10,11 @@ import { AuthService } from '../../shared';
 @Component({
   selector: 'user-login',
   template: `
-    <form [formGroup]='form' novalidate (ngSubmit)='submit()' style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+    <form [formGroup]='form' novalidate (ngSubmit)='submit()'
+          class="--component">
       <h3>Login:</h3>
-      <div>X-TOKEN: {{ authService.token }}</div>
-      <div *ngIf="isAuthSuccess">Юзер вошёл</div>
-      <div *ngIf="apiErrorMsg">{{ apiErrorMsg }}</div>
+      <div *ngIf="isSuccess">Юзер вошёл</div>
+      <div *ngIf="errorMsg">{{ errorMsg }}</div>
       <mat-form-field class="width-100">
         <input type="text" formControlName="email" matInput placeholder="Email">
         <mat-error *ngIf="form.controls['email'].invalid && form.controls['email'].touched">Некорректный email</mat-error>
@@ -27,18 +29,31 @@ import { AuthService } from '../../shared';
     </form>
   `
 })
-export class UserLoginComponent implements OnInit {
-  form: FormGroup;
-  isAuthSuccess = false;
-  apiErrorMsg = '';
+export class UserLoginComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject();
 
-  constructor(private formBuilder: FormBuilder, private userService: UsersService, public authService: AuthService, private router: Router) {
+  form: FormGroup;
+  isSuccess = false;
+  errorMsg = '';
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private router: Router,
+    public authService: AuthService
+    ) {
   }
 
   ngOnInit() {
-    if (this.authService.isAuth()) {
-      this.router.navigate(['/user_dashboard']);
-    }
+    this.authService.isAuth$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
+      isAuth => {
+        if (isAuth) {
+          this.router.navigate(['/users/dashboard']);
+        }
+      }
+    );
 
     this.form = this.formBuilder.group({
       email: [
@@ -58,14 +73,19 @@ export class UserLoginComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   submit() {
     if (this.form.valid) {
-      this.isAuthSuccess = false;
-      this.apiErrorMsg = null;
+      this.isSuccess = false;
+      this.errorMsg = null;
 
-      this.userService.login(this.form.value).subscribe(
-        isSuccess => this.isAuthSuccess = isSuccess,
-        error => this.apiErrorMsg = error
+      this.usersService.login(this.form.value).subscribe(
+        isSuccess => this.isSuccess = isSuccess,
+        error => this.errorMsg = error
       );
     }
   }

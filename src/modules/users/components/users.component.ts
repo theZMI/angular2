@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   // tslint:disable-next-line:component-selector
   selector: 'users',
   template: `
-    <div style="border: 1px solid red; border-radius: 5px; margin: 25px; padding: 25px;">
+    <div class="--component">
       <h3>UsersModule wrapper</h3>
       <router-outlet></router-outlet>
     </div>
