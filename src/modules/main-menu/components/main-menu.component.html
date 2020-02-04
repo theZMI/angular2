@@ -5,10 +5,15 @@
   <div *ngIf="isUserAuth; then userAuth else userNotAuth"></div>
   <ng-template #userAuth>
     <a routerLink="/users/dashboard" class="btn btn-link">Dashboard</a>
+    <a routerLink="/users/profile" class="btn btn-link">Profile</a>
     <a routerLink="/users/logout" class="btn btn-link">Logout</a>
   </ng-template>
   <ng-template #userNotAuth>
     <a routerLink="/users/login" class="btn btn-link">Login</a>
     <a routerLink="/users/registration" class="btn btn-link">Registration</a>
   </ng-template>
+  <br>
+  <div *ngIf="currentUser">
+    Welcome <strong>{{ currentUser.first_name }}</strong>, your password <strong>{{ currentUser.pwd }}</strong>. Lol :D
+  </div>
 </div>

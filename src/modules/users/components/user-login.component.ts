@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
 
 import { UsersService } from '../services';
-import { AuthService } from '../../shared';
+import { AuthService, BaseComponent } from '../../shared';
 
 @Component({
   selector: 'user-login',
@@ -29,9 +28,7 @@ import { AuthService } from '../../shared';
     </form>
   `
 })
-export class UserLoginComponent implements OnInit, OnDestroy {
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject();
-
+export class UserLoginComponent extends BaseComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSuccess = false;
   errorMsg = '';
@@ -42,6 +39,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     private router: Router,
     public authService: AuthService
     ) {
+    super();
   }
 
   ngOnInit() {
@@ -83,10 +81,13 @@ export class UserLoginComponent implements OnInit, OnDestroy {
       this.isSuccess = false;
       this.errorMsg = null;
 
-      this.usersService.login(this.form.value).subscribe(
+      this.usersService
+        .login(this.form.value)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(
         isSuccess => this.isSuccess = isSuccess,
         error => this.errorMsg = error
-      );
+        );
     }
   }
 }

@@ -4,3 +4,4 @@ export * from './user-login.component';
 export * from './user-logout.component';
 export * from './user-registration.component';
 export * from './user-dashboard.component';
+export * from './user-profile.component';

@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
+import { BaseComponent } from '../../shared';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,8 +9,9 @@ import { Component, OnInit} from '@angular/core';
     './app.component.scss'
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends BaseComponent implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {

@@ -1,4 +1,6 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { BaseComponent } from '../../shared';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +8,10 @@ import { Component} from '@angular/core';
     <div class="--component">
       <h3>Home</h3>
       <p>This is home page</p>
-    </div>
-  `
+    </div>`
 })
-export class HomeComponent {
+export class HomeComponent extends BaseComponent {
+  constructor() {
+    super();
+  }
 }

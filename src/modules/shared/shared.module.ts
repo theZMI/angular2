@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { ErrorInterceptor, AuthInterceptor } from './interceptors';
-import { MainMenuComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
+import { ErrorInterceptor, AuthInterceptor } from './interceptors';
 
 @NgModule({
   providers: [
@@ -12,14 +11,12 @@ import { CommonModule } from '@angular/common';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   declarations: [
-    MainMenuComponent
   ],
   imports: [
     RouterModule,
     CommonModule
   ],
   exports: [
-    MainMenuComponent
   ]
 })
 export class SharedModule {

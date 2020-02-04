@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from '../../shared/components';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
     </div>
   `
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends BaseComponent implements OnInit {
   constructor() {
+    super();
   }
 
   ngOnInit() {

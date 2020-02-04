@@ -7,6 +7,7 @@ import { AppComponent } from './components/app.component';
 import { HomeComponent } from './components/home.component';
 import { NotFoundComponent } from './components/not-found.component';
 import { SharedModule } from '../shared/shared.module';
+import { MainMenuModule } from '../main-menu/main-menu.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    SharedModule
+    SharedModule,
+    MainMenuModule
   ],
   providers: [
   ],

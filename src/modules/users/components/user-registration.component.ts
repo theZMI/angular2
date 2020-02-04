@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UsersService } from '../services';
+import { BaseComponent } from '../../shared/components';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'user-registration',
@@ -23,11 +25,12 @@ import { UsersService } from '../services';
     </form>
   `
 })
-export class UserRegistrationComponent implements OnInit {
+export class UserRegistrationComponent extends BaseComponent implements OnInit {
   form: FormGroup;
   isSuccess = false;
 
   constructor(private formBuilder: FormBuilder, private usersService: UsersService) {
+    super();
   }
 
   ngOnInit() {
@@ -51,7 +54,10 @@ export class UserRegistrationComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.usersService.add(this.form.value).subscribe(
+      this.usersService
+        .add(this.form.value)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe(
         isSuccess => {
           this.isSuccess = isSuccess;
         }

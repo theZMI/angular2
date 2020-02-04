@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UsersService } from '../services';
+import { BaseComponent } from '../../shared/components';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'users-list',
@@ -13,14 +15,17 @@ import { UsersService } from '../services';
     </div>
   `
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent extends BaseComponent implements OnInit {
   users;
 
   constructor(private usersService: UsersService) {
+    super();
   }
 
   ngOnInit() {
-    this.usersService.list().subscribe(
+    this.usersService.list()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
       data => {
         this.users = data;
       }

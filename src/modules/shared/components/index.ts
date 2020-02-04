@@ -1,1 +1,1 @@
-export * from './main-menu.component';
+export * from './base.component';

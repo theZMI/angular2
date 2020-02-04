@@ -13,7 +13,8 @@ import {
   UserLogoutComponent,
   UserRegistrationComponent,
   UsersListComponent,
-  UserDashboardComponent
+  UserDashboardComponent,
+  UserProfileComponent
 } from './components';
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'registration', component: UserRegistrationComponent },
       { path: 'logout', component: UserLogoutComponent },
       { path: 'dashboard', component: UserDashboardComponent },
+      { path: 'profile', component: UserProfileComponent },
     ]
   }
 ];
@@ -37,7 +39,8 @@ const routes: Routes = [
     UserLogoutComponent,
     UserLoginComponent,
     UserRegistrationComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    UserProfileComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -49,7 +52,7 @@ const routes: Routes = [
     SharedModule
   ],
   providers: [
-    UsersService
+    // UsersService
   ],
   bootstrap: [
   ]
